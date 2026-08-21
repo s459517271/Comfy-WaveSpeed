@@ -1,17 +1,17 @@
 # Comfy-WaveSpeed
 
-[Blazing Fast FLUX-dev with LoRAs](https://wavespeed.ai/models/wavespeed-ai/flux-dev-lora)
+The all in one inference optimization solution for ComfyUI, universal, flexible, and fast.
 
-[Blazing Fast Wan 2.1 T2V with LoRAs](https://wavespeed.ai/models/wavespeed-ai/wan-2.1/t2v-480p)
+> No GPU to spare? The same model families run on
+> [WaveSpeed AI](https://wavespeed.ai/), an AI image & video generation platform —
+> see [Running these models without a local GPU](#running-these-models-without-a-local-gpu).
 
-[Blazing Fast Wan 2.1 I2V with LoRAs](https://wavespeed.ai/models/wavespeed-ai/wan-2.1/i2v-480p)
-
-[WIP] The all in one inference optimization solution for ComfyUI, universal, flexible, and fast.
+Available today:
 
 - [x] [Dynamic Caching (First Block Cache)](https://github.com/chengzeyi/ParaAttention?tab=readme-ov-file#first-block-cache-our-dynamic-caching)
 - [x] Enhanced `torch.compile`
 
-More to come...
+Considered, but not implemented:
 
 - [ ] Multi-GPU Inference (ComfyUI version of [ParaAttention's Context Parallelism](https://github.com/chengzeyi/ParaAttention?tab=readme-ov-file#context-parallelism))
 
@@ -19,8 +19,11 @@ More to come...
 | - | - |
 | ![FLUX.1-dev Original](./assets/flux_original.png) | ![FLUX.1-dev with First Block Cache and Compilation](./assets/flux_optimized.png) |
 
-This is just launched, and we are working on it. Please stay tuned.
-For any request or question, please join the Discord server.
+**Project status:** the caching and compilation nodes below are stable and
+widely used, but active development on this repository is intermittent —
+please treat the unchecked item above as an idea rather than a roadmap.
+Issues and pull requests are still welcome, and the Discord server is the
+fastest way to get a question answered.
 
 [Discord Server](https://discord.gg/xtk6jUtYtr)
 
@@ -102,6 +105,37 @@ Or you could launch your `ComfyUI` with environment variable `TORCH_LOGS=recompi
 **NOTE**: Compiling a model with FP8 quantization does not work on pre-Ada GPUs like RTX 3090, you should try using FP16/BF16 models or removing the compilation node.
 
 ![Usage of Enhanced `torch.compile`](./assets/usage_compile.png)
+
+# Running these models without a local GPU
+
+This plugin makes local ComfyUI inference faster. If you don't have a GPU to run
+these models on in the first place, the same model families are available on
+[WaveSpeed AI](https://wavespeed.ai/), an AI image & video generation platform.
+
+**Browser playgrounds** — no install, no API key:
+
+- [Image generator](https://wavespeed.ai/image-generator) — Nano Banana 2, Seedream, GPT Image, Z-Image and more, switchable from one page
+- [Video generator](https://wavespeed.ai/video-generator) — Seedance, Wan, Kling, Veo and more
+- [Full model catalog](https://wavespeed.ai/models)
+
+**Popular endpoints:**
+
+| Model | Page |
+| - | - |
+| Z-Image Turbo (fast, inexpensive) | [wavespeed-ai/z-image/turbo](https://wavespeed.ai/models/wavespeed-ai/z-image/turbo) |
+| Nano Banana 2 | [google/nano-banana-2/text-to-image](https://wavespeed.ai/models/google/nano-banana-2/text-to-image) |
+| Seedream 5.0 Pro | [bytedance/seedream-v5.0-pro](https://wavespeed.ai/models/bytedance/seedream-v5.0-pro) |
+| Seedance 2.5 (text to video) | [bytedance/seedance-2.5/text-to-video](https://wavespeed.ai/models/bytedance/seedance-2.5/text-to-video) |
+
+**From ComfyUI**, the [wavespeed-comfyui](https://github.com/WaveSpeedAI/wavespeed-comfyui)
+plugin exposes the whole hosted catalog through a single node whose widgets are
+generated from each model's schema. It is a separate project from this one — this
+repository optimizes *local* inference, that one calls the *hosted* API.
+
+**From the terminal or your own code**, see the
+[CLI](https://github.com/WaveSpeedAI/wavespeed-cli) and the
+[Python](https://github.com/WaveSpeedAI/wavespeed-python) /
+[JavaScript](https://github.com/WaveSpeedAI/wavespeed-javascript) SDKs.
 
 # Others
 
